@@ -63,4 +63,17 @@ public class ContactDbHelper extends SQLiteOpenHelper {
         );
         return cursor;
     }
+
+    public void updateContact(int id, String name, String email, SQLiteDatabase database){
+        ContentValues values = new ContentValues();
+        values.put(ContactContract.ContactEntry.CONTACT_ID, id);
+        values.put(ContactContract.ContactEntry.NAME, name);
+        values.put(ContactContract.ContactEntry.EMAIL, email);
+
+        String whereClause = ContactContract.ContactEntry.CONTACT_ID + " = ?";
+        String[] whereArgs = {Integer.toString(id)};
+
+        database.update(ContactContract.ContactEntry.TABLE_NAME, values, whereClause, whereArgs);
+        Log.d("Database Operations", "One raw updated...");
+    }
 }

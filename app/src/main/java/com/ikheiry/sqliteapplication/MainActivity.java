@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.ikheiry.sqliteapplication.fragment.AddContactFragment;
 import com.ikheiry.sqliteapplication.fragment.HomeFragment;
 import com.ikheiry.sqliteapplication.fragment.ReadContactFragment;
+import com.ikheiry.sqliteapplication.fragment.UpdateFragment;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnDbOPListener{
 
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnDb
             case 1:
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new ReadContactFragment())
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 2:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new UpdateFragment())
                         .addToBackStack(null)
                         .commit();
                 break;
