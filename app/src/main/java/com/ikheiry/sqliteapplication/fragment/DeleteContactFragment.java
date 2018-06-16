@@ -17,12 +17,12 @@ import com.ikheiry.sqliteapplication.db.ContactDbHelper;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UpdateFragment extends Fragment {
+public class DeleteContactFragment extends Fragment {
 
-    private EditText txt_id, txt_name, txt_email;
-    private Button bnUpdate;
+    private EditText txt_id;
+    private Button bnDelete;
 
-    public UpdateFragment() {
+    public DeleteContactFragment() {
         // Required empty public constructor
     }
 
@@ -31,37 +31,31 @@ public class UpdateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_update, container, false);
+        View view = inflater.inflate(R.layout.fragment_delete_contact, container, false);
 
-        txt_id = view.findViewById(R.id.txt_update_id);
-        txt_name = view.findViewById(R.id.txt_update_name);
-        txt_email = view.findViewById(R.id.txt_update_email);
-        bnUpdate = view.findViewById(R.id.bn_update);
+        txt_id = view.findViewById(R.id.txt_delete_id);
+        bnDelete = view.findViewById(R.id.bn_delete);
 
-        bnUpdate.setOnClickListener(new View.OnClickListener() {
+        bnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateContact();
+                deleteContact();
             }
         });
 
         return view;
     }
 
-    private void updateContact(){
+    private void deleteContact(){
         String id = txt_id.getText().toString();
-        String name = txt_name.getText().toString();
-        String email = txt_email.getText().toString();
 
         ContactDbHelper dbHelper = new ContactDbHelper(getActivity());
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        dbHelper.updateContact(Integer.parseInt(id), name, email, database);
+        dbHelper.deleteContact(Integer.parseInt(id), database);
         dbHelper.close();
-        Toast.makeText(getActivity(), "Contact updated...", Toast.LENGTH_SHORT).show();
 
         txt_id.setText("");
-        txt_name.setText("");
-        txt_email.setText("");
+        Toast.makeText(getActivity(), "Contact deleted successfully...", Toast.LENGTH_SHORT).show();
     }
 
 }

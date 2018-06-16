@@ -4,9 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.ikheiry.sqliteapplication.fragment.AddContactFragment;
+import com.ikheiry.sqliteapplication.fragment.DeleteContactFragment;
 import com.ikheiry.sqliteapplication.fragment.HomeFragment;
 import com.ikheiry.sqliteapplication.fragment.ReadContactFragment;
-import com.ikheiry.sqliteapplication.fragment.UpdateFragment;
+import com.ikheiry.sqliteapplication.fragment.UpdateContactFragment;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnDbOPListener{
 
@@ -42,7 +43,13 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnDb
                 break;
             case 2:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new UpdateFragment())
+                        .replace(R.id.fragment_container, new UpdateContactFragment())
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 3:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new DeleteContactFragment())
                         .addToBackStack(null)
                         .commit();
                 break;

@@ -76,4 +76,12 @@ public class ContactDbHelper extends SQLiteOpenHelper {
         database.update(ContactContract.ContactEntry.TABLE_NAME, values, whereClause, whereArgs);
         Log.d("Database Operations", "One raw updated...");
     }
+
+    public void deleteContact(int id, SQLiteDatabase database){
+        String whereClause = ContactContract.ContactEntry.CONTACT_ID + " = ?";
+        String[] whereArgs = {Integer.toString(id)};
+
+        database.delete(ContactContract.ContactEntry.TABLE_NAME, whereClause, whereArgs);
+        Log.d("Database Operations", "One raw deleted...");
+    }
 }
